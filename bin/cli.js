@@ -13,7 +13,7 @@ const { version } = JSON.parse(fs.readFileSync("package.json", "utf8"));
 const program = new Command();
 
 program
-  .name("tree-log")
+  .name("folder-print")
   .description("Using the CLI to generate the tree structure of the directory")
   .version(version, "-v, --version, -V");
 program.option(

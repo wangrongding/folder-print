@@ -1,19 +1,32 @@
 {
-  "name": "tree-log",
-  "version": "0.0.1",
-  "description": "",
+  "name": "folder-print",
+  "version": "0.0.2",
+  "description": "A terminal command line tool for printing the tree structure of the current directory.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "tree": "./bin/cli.js",
-    "tl": "./bin/cli.js"
+    "folder-print": "./bin/cli.js",
+    "fp": "./bin/cli.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "folder",
+    "file",
+    "directory structure",
+    "tree",
+    "log",
+    "file-tree",
+    "folder-print"
+  ],
+  "author": "荣顶",
   "license": "ISC",
+  "homepage": "https://github.com/wangrongding/folder-print/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangrongding/folder-print.git"
+  },
   "dependencies": {
     "chalk": "^5.1.2",
     "commander": "^9.4.1"
