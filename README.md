@@ -9,12 +9,12 @@ A terminal command line tool for printing the tree structure of the current dire
 ## 示例(Example)
 
 输出当前目录的树形结构：(默认输出最大层级为 10)  
-Output the tree structure of the current directory: (default output maximum level is 10)
-![](https://assets.fedtop.com/picbed/202210182003825.png)
+Output the tree structure of the current directory: (default output maximum level is 10)  
+![](https://assets.fedtop.com/picbed/202210182135912.png)
 
 指定输出最大层级  
-Specify the maximum level of output
-![](https://assets.fedtop.com/picbed/202210182002619.png)
+Specify the maximum level of output  
+![](https://assets.fedtop.com/picbed/202210182134984.png)
 
 ## 安装(Install)
 
@@ -54,6 +54,6 @@ tree /path/to/dir
 fp /path/to/dir
 ``` -->
 
-![](https://assets.fedtop.com/picbed/202210182003825.png)
+![](https://assets.fedtop.com/picbed/202210182135912.png)
 
-![](https://assets.fedtop.com/picbed/202210182002619.png)
+![](https://assets.fedtop.com/picbed/202210182134984.png)

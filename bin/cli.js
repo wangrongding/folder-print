@@ -54,7 +54,20 @@ export function printTree(dir = __dirname, spaceNum) {
     return;
   }
   // 读取文件夹
-  const files = fs.readdirSync(dir);
+  const files = fs.readdirSync(dir).sort();
+  // 按文件夹和首字母排序
+  files.sort((a, b) => {
+    const aIsDir = fs.statSync(path.join(dir, a)).isDirectory();
+    const bIsDir = fs.statSync(path.join(dir, b)).isDirectory();
+    if (aIsDir && !bIsDir) {
+      return -1;
+    } else if (!aIsDir && bIsDir) {
+      return 1;
+    } else {
+      return a.localeCompare(b);
+    }
+  });
+
   const length = files.length - 1;
   // 遍历文件夹
   files.forEach((file, index) => {

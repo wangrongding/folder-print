@@ -1,6 +1,6 @@
 {
   "name": "folder-print",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A terminal command line tool for printing the tree structure of the current directory.",
   "main": "index.js",
   "type": "module",
