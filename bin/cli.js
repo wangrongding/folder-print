@@ -30,12 +30,21 @@ program.option(
 program.parse(process.argv);
 
 // 需要过滤的文件夹
-const filterDir = ["node_modules", ".git", ".idea", "dist", "build", ".vscode"];
+const filterDir = [
+  "node_modules",
+  ".git",
+  ".idea",
+  "dist",
+  "build",
+  ".vscode",
+  ".DS_Store",
+];
 
 // 打印项目名称
 console.log(
   "🌸",
-  chalk.blue(__dirname.split("/")[__dirname.split("/").length - 1])
+  chalk.blue(__dirname.split("/")[__dirname.split("/").length - 1]),
+  "🌸"
 );
 
 // 遍历文件夹，打印目录结构
@@ -46,37 +55,48 @@ export function printTree(dir = __dirname, spaceNum) {
   }
   // 读取文件夹
   const files = fs.readdirSync(dir);
+  const length = files.length - 1;
   // 遍历文件夹
   files.forEach((file, index) => {
     const filePath = path.join(dir, file);
     const stats = fs.statSync(filePath);
     if (stats.isFile()) {
-      // const str = `${spaceNum !== 0 ? "" : ""}${generateSpace(spaceNum)}${
-      //   index === files.length - 1 ? "└── " : "├── "
-      // }${file}`;
-      const str = `${generateSpace(spaceNum)}${
-        index === files.length - 1 ? "└─ " : "├─ "
-      }${file}`;
+      const str = `${generateSpace(spaceNum)}${generateLine(
+        index,
+        length
+      )}${file}`;
+
       log(str);
     } else if (stats.isDirectory()) {
       // 过滤掉node_modules等文件夹
       if (filterDir.includes(file)) {
         return;
       }
-      const str = `${generateSpace(spaceNum)}${
-        index === files.length - 1 ? "└─ " : "├─ "
-      }${chalk.hex("#4dc4ff").bold(file)}`;
+
+      const str = `${generateSpace(spaceNum)}${generateLine(
+        index,
+        length
+      )}${chalk.hex("#4dc4ff").bold(file)}`;
       log(str);
       printTree(filePath, spaceNum + 1);
     }
   });
 }
 
+// 生成指定的连接符
+function generateLine(index, length) {
+  if (index === length) {
+    return "└─ ";
+  }
+  return "├─ ";
+}
+
 // 生成指定的空格
 function generateSpace(num) {
   let space = ``;
   for (let i = 0; i < num; i++) {
-    space += `   `;
+    // space += `   `;
+    space += `│   `;
   }
   return space;
 }
