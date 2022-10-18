@@ -60,19 +60,17 @@ export function printTree(dir = __dirname, spaceNum) {
   files.forEach((file, index) => {
     const filePath = path.join(dir, file);
     const stats = fs.statSync(filePath);
+    // 过滤文件夹
+    if (filterDir.includes(file)) {
+      return;
+    }
     if (stats.isFile()) {
       const str = `${generateSpace(spaceNum)}${generateLine(
         index,
         length
       )}${file}`;
-
       log(str);
     } else if (stats.isDirectory()) {
-      // 过滤掉node_modules等文件夹
-      if (filterDir.includes(file)) {
-        return;
-      }
-
       const str = `${generateSpace(spaceNum)}${generateLine(
         index,
         length
