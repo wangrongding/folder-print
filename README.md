@@ -2,9 +2,9 @@
 
 ## 介绍(Description)
 
-一个用于打印当前目录树形结构的终端命令行工具。
+一个将当前目录结构生成 markdown 文件的终端命令行工具。
 
-A terminal command line tool for printing the tree structure of the current directory.
+A terminal command line tool that generates markdown files from the current directory structure.
 
 ## 安装(Install)
 
