@@ -2,9 +2,8 @@
 
 ## 介绍(Description)
 
-一个将当前目录结构生成 markdown 文件的终端命令行工具。
-
-A terminal command line tool that generates markdown files from the current directory structure.
+快速生成文件夹目录结构，支持定义目录层级，支持生成到 markdown 文件。  
+Quickly generate folder directory structure, support for defining directory hierarchy, support for generating to markdown files.
 
 ## 安装(Install)
 
@@ -12,8 +11,7 @@ A terminal command line tool that generates markdown files from the current dire
 npm i folder-print -g
 ```
 
-当然你也可以直接使用 npx 运行
-
+当然你也可以直接使用 npx 运行  
 Of course you can also run it directly with npx
 
 ```sh
@@ -30,7 +28,7 @@ Output the tree structure of the current directory: (default output maximum leve
 fp
 # or
 folder-print
-# 不想全局安装的话
+# 免安装(No installation)
 npx folder-print
 ```
 
@@ -45,7 +43,7 @@ npx folder-print
 fp -d 0
 # or
 folder-print -d 0
-# 不想全局安装的话
+# 免安装(No installation)
 npx folder-print -d 0
 ```
 
@@ -62,7 +60,7 @@ Save the output result to a file
 fp -p
 # or
 folder-print -p
-# 不想全局安装的话
+# 免安装(No installation)
 npx folder-print -p
 ```
 
