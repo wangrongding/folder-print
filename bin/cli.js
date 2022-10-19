@@ -1,15 +1,14 @@
-#! /usr/bin/env node
+#! /usr/bin/env node  --no-warnings
 
 import fs from "fs";
 import path from "path";
 import { Command } from "commander";
 import chalk from "chalk";
 
-// import packageJsonData from "../package.json" assert { type: "json" };
-// console.log("🚀🚀🚀 / version", packageJsonData);
-
+import packageJsonData from "../package.json" assert { type: "json" };
+const { version } = packageJsonData;
 const __dirname = path.resolve();
-const { version } = JSON.parse(fs.readFileSync("package.json", "utf8"));
+// const { version } = JSON.parse(fs.readFileSync("package.json", "utf8"));
 const program = new Command();
 
 program
@@ -21,6 +20,7 @@ program.option(
   "Set the depth of the folder to be traversed",
   "10"
 );
+program.option("-p, --print", "Generate a markdown file");
 // program
 //   .command("list")
 //   .alias("ls")
@@ -28,6 +28,10 @@ program.option(
 //   .action(test);
 // program.parse();
 program.parse(process.argv);
+// 打印参数
+// console.log(program.opts());
+const depth = program.opts().depth;
+const print = program.opts().print;
 
 // 需要过滤的文件夹
 const filterDir = [
@@ -40,17 +44,20 @@ const filterDir = [
   ".DS_Store",
 ];
 
-// 打印项目名称
-console.log(
-  "🌸",
-  chalk.blue(__dirname.split("/")[__dirname.split("/").length - 1]),
-  "🌸"
-);
+// 项目名称
+const folderName = `🌸 ${
+  __dirname.split("/")[__dirname.split("/").length - 1]
+} 🌸 \n`;
+const colorFolderName = `🌸 ${chalk.greenBright(
+  __dirname.split("/")[__dirname.split("/").length - 1]
+)} 🌸\n`;
 
+let content = folderName;
+let colorContent = colorFolderName;
 // 遍历文件夹，打印目录结构
 export function printTree(dir = __dirname, spaceNum) {
   // 超出深度，不再遍历
-  if (spaceNum > program.opts().depth) {
+  if (spaceNum > depth) {
     return;
   }
   // 读取文件夹
@@ -82,13 +89,19 @@ export function printTree(dir = __dirname, spaceNum) {
         index,
         length
       )}${file}`;
-      log(str);
+      content += `${str}\n`;
+      colorContent += `${str}\n`;
     } else if (stats.isDirectory()) {
       const str = `${generateSpace(spaceNum)}${generateLine(
         index,
         length
+      )}${file}`;
+      const colorStr = `${generateSpace(spaceNum)}${generateLine(
+        index,
+        length
       )}${chalk.hex("#4dc4ff").bold(file)}`;
-      log(str);
+      content += `${str}\n`;
+      colorContent += `${colorStr}\n`;
       printTree(filePath, spaceNum + 1);
     }
   });
@@ -112,9 +125,12 @@ function generateSpace(num) {
   return space;
 }
 
-// 打印内容
-function log(val) {
-  console.log(val);
-}
-
 printTree(__dirname, 0);
+if (print) {
+  // console.log(content);
+  content = `\`\`\`sh \n${content}\`\`\``;
+  fs.writeFileSync("folder-tree.md", content, "utf8");
+  console.log("✅ 已将目录结构生成到 folder-tree.md 文件中");
+} else {
+  console.log(colorContent);
+}
